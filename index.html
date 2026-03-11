@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kifaru WiFi — Unstoppable Internet</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=DM+Sans:wght@400;500;600;700&family=Black+Ops+One&family=Russo+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
@@ -218,9 +218,9 @@ nav.scrolled{background:rgba(6,12,20,0.98)}
 .pulse{width:6px;height:6px;background:var(--cy);border-radius:50%;animation:blinkDot 1.4s infinite}
 
 .h-title{
-  font-family:'Bebas Neue',cursive;
-  font-size:clamp(3rem,5.5vw,5.2rem);
-  line-height:.88;letter-spacing:.5px;color:#fff;
+  font-family:'Russo One',sans-serif;
+  font-size:clamp(2.6rem,5vw,4.8rem);
+  line-height:.92;letter-spacing:-1px;color:#fff;
   margin-bottom:14px;
 }
 .h-title .cy{color:var(--cy)}
@@ -546,9 +546,10 @@ footer{background:#030609;border-top:1px solid rgba(0,229,204,.07);padding:46px 
   .nav-links{display:none}
   .nav-cta{padding:7px 14px;font-size:.7rem;letter-spacing:.5px}
 
-  /* HERO — scrollable on mobile, not locked to 100vh */
+  /* HERO — auto height, scrolls naturally */
   #hero{
-    height:auto;min-height:100svh;
+    height:auto;
+    min-height:0;
     padding-top:52px;
     overflow:visible;
   }
@@ -571,14 +572,14 @@ footer{background:#030609;border-top:1px solid rgba(0,229,204,.07);padding:46px 
     gap:0;
   }
 
-  /* LEFT PANEL — full width, stacks first */
+  /* LEFT PANEL — coverage cards come SECOND on mobile */
   .left-panel{
     width:100%;
     padding:0;
     border-right:none;
     border-bottom:none;
     margin-bottom:0;
-    order:1;
+    order:2;
   }
 
   /* Toggle */
@@ -613,20 +614,27 @@ footer{background:#030609;border-top:1px solid rgba(0,229,204,.07);padding:46px 
   .map-title{font-size:.88rem;letter-spacing:1.5px}
   .map-back{padding:5px 10px;font-size:.65rem}
 
-  /* Accent divider after map panel */
+  /* Accent divider before coverage section */
+  .left-panel::before{
+    content:'COVERAGE ZONES';
+    display:block;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:.65rem;font-weight:700;letter-spacing:4px;
+    text-transform:uppercase;color:var(--cy);
+    margin-bottom:12px;
+    display:flex;align-items:center;gap:10px;
+  }
   .left-panel::after{
-    content:'';display:block;width:40px;height:2px;
-    background:linear-gradient(90deg,var(--cy),transparent);
-    margin:14px 0 18px;
-    border-radius:2px;
+    content:'';display:none;
   }
 
-  /* RIGHT PANEL — stacks below map */
+  /* RIGHT PANEL — comes FIRST on mobile (hero text leads) */
   .right-panel{
-    order:2;
+    order:1;
     padding:0;
     width:100%;
     justify-content:flex-start;
+    margin-bottom:28px;
   }
   .h-badge{font-size:.63rem;letter-spacing:1.5px;padding:5px 12px;margin-bottom:12px}
   .h-title{
@@ -648,20 +656,24 @@ footer{background:#030609;border-top:1px solid rgba(0,229,204,.07);padding:46px 
 
   /* HERO BOTTOM */
   .hero-bottom{
-    padding:16px 4% 18px;
-    gap:14px;
+    padding:20px 4% 24px;
+    gap:10px;
     flex-direction:column;
     align-items:center;
     background:none;
   }
-  .wifi-icon svg{width:60px;height:46px}
-  .stats-strip{width:100%;display:grid;grid-template-columns:1fr 1fr;border-radius:12px}
-  .si{padding:10px 0;border-right:1px solid rgba(255,255,255,0.05)!important}
+  .wifi-icon{display:none}
+  .stats-strip{
+    width:100%;
+    display:grid;grid-template-columns:1fr 1fr;
+    border-radius:12px;
+  }
+  .si{padding:12px 0;border-right:1px solid rgba(255,255,255,0.05)!important}
   .si:nth-child(2){border-right:none!important}
   .si:nth-child(3){border-top:1px solid rgba(255,255,255,0.05);border-right:1px solid rgba(255,255,255,0.05)!important}
   .si:nth-child(4){border-top:1px solid rgba(255,255,255,0.05);border-right:none!important}
-  .sn{font-size:1.55rem}
-  .sl{font-size:.55rem}
+  .sn{font-size:1.65rem}
+  .sl{font-size:.56rem}
 
   /* TICKER */
   .ti{padding:11px 22px;font-size:.78rem}
@@ -754,6 +766,23 @@ footer{background:#030609;border-top:1px solid rgba(0,229,204,.07);padding:46px 
   .pc.rv:last-child{grid-column:span 1}
   .steps{grid-template-columns:1fr}
 }
+
+/* Mobile expandable area cards */
+@media(max-width:768px){
+  .ac-expanded .ac-top{height:180px!important;transition:height .4s ease}
+  .ac-top{transition:height .4s ease}
+  .ac-expand-hint{
+    display:flex;align-items:center;justify-content:center;
+    font-size:.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--muted);gap:4px;padding:4px 0 2px;
+    transition:color .25s;
+  }
+  .ac:hover .ac-expand-hint,.ac-expanded .ac-expand-hint{color:var(--cy)}
+  .ac.or-card:hover .ac-expand-hint,.ac.or-card.ac-expanded .ac-expand-hint{color:var(--or)}
+  .ac-expand-hint .arr{transition:transform .35s}
+  .ac-expanded .ac-expand-hint .arr{transform:rotate(180deg)}
+}
+@media(min-width:769px){.ac-expand-hint{display:none}}
 </style>
 </head>
 <body>
@@ -796,7 +825,7 @@ footer{background:#030609;border-top:1px solid rgba(0,229,204,.07);padding:46px 
       <div id="areas-view">
 
         <!-- Kihunguro — Active -->
-        <div class="ac" onclick="showMap('kihunguro')">
+        <div class="ac" onclick="mobileCardTap(this,'kihunguro')">
           <div class="ac-top">
             <svg viewBox="0 0 290 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="290" height="80" fill="#06101a"/>
@@ -851,6 +880,7 @@ footer{background:#030609;border-top:1px solid rgba(0,229,204,.07);padding:46px 
               <circle cx="188" cy="67" r="2.8" class="mmring" fill="none" stroke="#00E5CC" style="animation-delay:.7s"/>
             </svg>
           </div>
+          <div class="ac-expand-hint"><span>TAP TO EXPLORE</span><span class="arr">▼</span></div>
           <div class="ac-body">
             <div class="ac-info">
               <div class="ac-name">Kihunguro</div>
@@ -866,7 +896,7 @@ footer{background:#030609;border-top:1px solid rgba(0,229,204,.07);padding:46px 
         </div>
 
         <!-- Githurai 45 — Expanding -->
-        <div class="ac or-card" onclick="showMap('githurai')">
+        <div class="ac or-card" onclick="mobileCardTap(this,'githurai')">
           <div class="ac-top">
             <svg viewBox="0 0 290 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="290" height="80" fill="#06101a"/>
@@ -896,6 +926,7 @@ footer{background:#030609;border-top:1px solid rgba(0,229,204,.07);padding:46px 
               <circle cx="58" cy="43" r="3.2" fill="none" stroke="#FF6500" stroke-width=".7" style="animation:mmRing 3s ease-out infinite;animation-delay:1.5s"/>
             </svg>
           </div>
+          <div class="ac-expand-hint"><span>TAP TO EXPLORE</span><span class="arr">▼</span></div>
           <div class="ac-body">
             <div class="ac-info">
               <div class="ac-name">Githurai 45</div>
@@ -1292,6 +1323,20 @@ function sendMsg(){
   setTimeout(()=>{document.getElementById('ti')?.remove();addM(getR(msg),'bot')},850+Math.random()*600);
 }
 function qr(m){document.getElementById('cwi').value=m;sendMsg()}
+
+// Mobile card tap: first tap expands, second tap opens map
+function mobileCardTap(el, key){
+  if(window.innerWidth > 768){
+    showMap(key);
+    return;
+  }
+  if(el.classList.contains('ac-expanded')){
+    showMap(key);
+  } else {
+    document.querySelectorAll('.ac').forEach(c=>c.classList.remove('ac-expanded'));
+    el.classList.add('ac-expanded');
+  }
+}
 </script>
 </body>
 </html>
