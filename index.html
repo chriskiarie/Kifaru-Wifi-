@@ -563,74 +563,88 @@ footer{background:#030609;border-top:1px solid rgba(0,229,204,.07);padding:46px 
   .hb-sub{font-size:.6rem;letter-spacing:3px;gap:8px}
   .hb-sub::before,.hb-sub::after{width:24px}
 
-  /* HERO BODY — single column */
+  /* HERO BODY — true single column flex */
   .hero-body{
-    grid-template-columns:1fr;
+    display:flex;
+    flex-direction:column;
     padding:0 4%;
     gap:0;
-    align-items:start;
   }
 
-  /* LEFT PANEL — full width, no border */
+  /* LEFT PANEL — full width, stacks first */
   .left-panel{
-    padding:0 0 16px 0;
+    width:100%;
+    padding:0;
     border-right:none;
-    border-bottom:1px solid rgba(0,229,204,0.07);
-    margin-bottom:20px;
+    border-bottom:none;
+    margin-bottom:0;
+    order:1;
   }
 
-  /* Toggle — full width, bigger tap targets */
-  .cov-toggle{width:100%;margin-bottom:12px}
+  /* Toggle */
+  .cov-toggle{width:100%;margin-bottom:10px}
   .ctb{padding:9px 12px;font-size:.72rem}
 
-  /* Area cards — side by side on mobile (compact) */
+  /* Area cards — side by side, compact */
   #areas-view{
     flex-direction:row;
     gap:10px;
+    margin-bottom:14px;
   }
   .ac{
     flex:1;
-    transform:none!important; /* disable hover slide on mobile */
-    border-radius:14px;
+    transform:none!important;
+    border-radius:12px;
   }
-  .ac-top{height:80px}
-  .ac-body{padding:10px 11px 11px}
-  .ac-name{font-size:1rem;letter-spacing:1px}
-  .ac-status{font-size:.58rem;letter-spacing:1px}
-  .ac-meta{gap:8px;margin-top:5px}
-  .ac-stat{font-size:.58rem}
-  .ac-stat strong{font-size:.78rem}
-  .ac-go{display:none} /* hidden on mobile */
+  .ac-top{height:72px}
+  .ac-body{padding:9px 10px 10px}
+  .ac-name{font-size:.95rem;letter-spacing:1px}
+  .ac-status{font-size:.57rem;letter-spacing:1px}
+  .ac-meta{gap:6px;margin-top:4px}
+  .ac-stat{font-size:.57rem}
+  .ac-stat strong{font-size:.75rem}
+  .ac-go{display:none}
 
   /* Map view */
-  #map-view{min-height:0}
-  #lmap{height:260px}
-  .map-leg{flex-wrap:wrap;gap:8px}
+  #map-view{min-height:0;margin-bottom:14px}
+  #lmap{height:240px}
+  .map-leg{flex-wrap:wrap;gap:7px}
   .map-hd{gap:7px}
-  .map-title{font-size:.9rem;letter-spacing:1.5px}
+  .map-title{font-size:.88rem;letter-spacing:1.5px}
   .map-back{padding:5px 10px;font-size:.65rem}
 
-  /* RIGHT PANEL — full width, no left padding */
-  .right-panel{
-    padding:0 0 0 0;
+  /* Accent divider after map panel */
+  .left-panel::after{
+    content:'';display:block;width:40px;height:2px;
+    background:linear-gradient(90deg,var(--cy),transparent);
+    margin:14px 0 18px;
+    border-radius:2px;
   }
-  .h-badge{font-size:.64rem;letter-spacing:1.5px;padding:5px 12px;margin-bottom:13px}
+
+  /* RIGHT PANEL — stacks below map */
+  .right-panel{
+    order:2;
+    padding:0;
+    width:100%;
+    justify-content:flex-start;
+  }
+  .h-badge{font-size:.63rem;letter-spacing:1.5px;padding:5px 12px;margin-bottom:12px}
   .h-title{
-    font-size:clamp(2.8rem,12vw,4rem);
+    font-size:clamp(2.6rem,11vw,3.6rem);
     line-height:.88;
     margin-bottom:12px;
   }
-  .h-kicker{font-size:.9rem;letter-spacing:2px;margin-bottom:10px}
+  .h-kicker{font-size:.88rem;letter-spacing:2px;margin-bottom:10px}
   .h-desc{
-    font-size:.84rem;
+    font-size:.83rem;
     max-width:100%;
-    margin-bottom:18px;
+    margin-bottom:16px;
     line-height:1.75;
   }
-  .h-badges{gap:10px;margin-bottom:20px;flex-wrap:wrap}
+  .h-badges{gap:10px;margin-bottom:18px;flex-wrap:wrap}
   .cbadge{font-size:.7rem}
-  .h-btns{gap:9px}
-  .btn-p,.btn-g{padding:13px 22px;font-size:.82rem;flex:1;text-align:center;justify-content:center}
+  .h-btns{gap:9px;margin-bottom:8px}
+  .btn-p,.btn-g{padding:13px 20px;font-size:.82rem;flex:1;text-align:center;display:flex;align-items:center;justify-content:center}
 
   /* HERO BOTTOM */
   .hero-bottom{
